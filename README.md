@@ -1,7 +1,15 @@
-# Flappy Bird
-- Flappy Bird using Pygame
+# [Snake Game]()
+- Snake Game Using Pygame
+- ***Full Source Code :*** [Python Snake Game](./snake-game.py)
 
-### Installation Guide :
+1. **Display:** First you need to understand what we require for the game like width and height of the game window
+2. **Movement:** Snake will have set position in x and y direction and velocity in x and y direction (in both +ve & -ve)
+3. **Game Over:** At collision on end of the game window or On reaching at the end of the window snake go on opposite position.
+4. **Score:** On every user completion task we have to increase and display the score
+5. **Food:** We need to create Rectangle food for snake. If the food position and snake position are same we have to reset food position and update the score.
+6. **Snake Length:** We have to increase the length of the snake at every collision with food.
+
+## 1. Installation Guide :
 
 - Install pygame using cmd -
 
@@ -16,7 +24,7 @@ python
 import pygame
 ```
 
-## [Basic Concepts](./1-Basic-Concept.py)
+# [Basic Concepts](./1-Basic-Concept.py)
 
 ### 1. Creating Window :
 - Whenever you import the pygame you have to initialize the pygame
@@ -89,17 +97,3 @@ if event.type == pygame.KEYDOWN:
 ```
 
 
-
-# [Snake Game]()
-
-- ***Full Source Code :*** [Python Snake Game]()
-
-1. **Display:** First you need to understand what we require for the game like width and height of the game window
-2. **Movement:** Snake will have set position in x and y direction and velocity in x and y direction (in both +ve & -ve)
-3. **Game Over:** At collision on end of the game window or On reaching at the end of the window snake go on opposite position.
-4. **Score:** On every user completion task we have to increase and display the score
-5. **Food:** We need to create Rectangle food for snake. If the food position and snake position are same we have to reset food position and update the score.
-6. **Snake Length:** We have to increase the length of the snake at every collision with food.
-
-
-### 1. 
