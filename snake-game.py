@@ -1,4 +1,5 @@
 # importing pygame
+from mimetypes import init
 import pygame
 import random
 # initializing as this is a pygame
@@ -30,9 +31,10 @@ snake_x = 45
 snake_y = 45
 velocity_x = 0
 velocity_y = 0
-snake_size = 10
-fps = 30
+snake_size = 15
+fps = 60
 score = 0
+init_velocity = 5
 
 # Food position variable
 food_x = random.randint(10, screen_width-10)
@@ -40,6 +42,13 @@ food_y = random.randint(10, screen_height-10)
 
 # Making clock for updating frame
 clock = pygame.time.Clock()
+
+# Choosing font of the
+font = pygame.font.SysFont(None, 55)
+# Creating function for displaying score on the screen
+def score_screen(text, color, x, y):
+    screen_text = font.render(text, True, color)
+    gameWindow.blit(screen_text, [x, y])
 
 # Defining Game Loop -
 while not exit_game:
@@ -53,28 +62,38 @@ while not exit_game:
         if event.type == pygame.KEYDOWN:
             # right key in +ve x direction
             if event.key == pygame.K_RIGHT:
-                velocity_x = 10
+                velocity_x = init_velocity
                 velocity_y = 0
 
             # left key in -ve x direction
             if event.key == pygame.K_LEFT:
-                velocity_x = -10
+                velocity_x = -init_velocity
                 velocity_y = 0
 
             # up key in +ve y direction
             if event.key == pygame.K_UP:
-                velocity_y = -10
+                velocity_y = -init_velocity
                 velocity_x = 0
 
             # right key in -ve y direction
             if event.key == pygame.K_DOWN:
-                velocity_y = 10
+                velocity_y = init_velocity
                 velocity_x = 0
     
     # Setting Velocity in x direction
     snake_x += velocity_x
     # Setting Velocity in y direction
     snake_y += velocity_y
+
+    # Creating food catch and add upto the score -
+    if abs(snake_x - food_x) < 8 and abs(snake_y - food_y) < 8:
+        score += 10
+        print("Score: ", score)
+        # calling score_screen() for display score
+        score_screen("Score: " + str(score), black, 5, 5)
+        # change Food position variable
+        food_x = random.randint(10, screen_width-10)
+        food_y = random.randint(10, screen_height-10)
 
     # Setting background color -
     gameWindow.fill(white)
