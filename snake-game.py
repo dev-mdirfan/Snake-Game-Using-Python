@@ -1,5 +1,7 @@
 # importing pygame
+from email import header
 from mimetypes import init
+from turtle import color
 import pygame
 import random
 # initializing as this is a pygame
@@ -35,20 +37,26 @@ snake_size = 15
 fps = 60
 score = 0
 init_velocity = 5
+snake_list = []
+snake_length = 1
 
 # Food position variable
-food_x = random.randint(10, screen_width-10)
-food_y = random.randint(10, screen_height-10)
+food_x = random.randint(15, screen_width-15)
+food_y = random.randint(15, screen_height-15)
 
 # Making clock for updating frame
 clock = pygame.time.Clock()
 
-# Choosing font of the
+# Choosing font of the score display ->
 font = pygame.font.SysFont(None, 55)
 # Creating function for displaying score on the screen
 def score_screen(text, color, x, y):
     screen_text = font.render(text, True, color)
     gameWindow.blit(screen_text, [x, y])
+
+def plot_snake(gameWindow, color, snake_list, snake_size):
+    for x,y in snake_list:
+        pygame.draw.rect(gameWindow, color, [x, y, snake_size, snake_size])
 
 # Defining Game Loop -
 while not exit_game:
@@ -88,19 +96,33 @@ while not exit_game:
     # Creating food catch and add upto the score -
     if abs(snake_x - food_x) < 8 and abs(snake_y - food_y) < 8:
         score += 10
-        print("Score: ", score)
-        # calling score_screen() for display score
-        score_screen("Score: " + str(score), black, 5, 5)
         # change Food position variable
         food_x = random.randint(10, screen_width-10)
         food_y = random.randint(10, screen_height-10)
+        snake_length += 5
 
     # Setting background color -
     gameWindow.fill(white)
+    # calling score_screen() for displaying Score
+    score_screen("Score: " + str(score), red, 5, 5)
     # Displaying Food after white background display
     pygame.draw.rect(gameWindow, red, [food_x, food_y, snake_size, snake_size])
+
+    # Increasing length of the snake
+    head = []
+    head.append(snake_x)
+    head.append(snake_y)
+    snake_list.append(head)
+
+    if len(snake_list)>snake_length:
+        del snake_list[0
+        ]
+
     # To make snake head rectangle -
-    pygame.draw.rect(gameWindow, black, [snake_x, snake_y, snake_size, snake_size])
+    # pygame.draw.rect(gameWindow, black, [snake_x, snake_y, snake_size, snake_size])
+
+    # 
+    plot_snake(gameWindow, black, snake_list, snake_size)
     # To reflect the change or update the screen
     pygame.display.update()
     # every frame it updates
